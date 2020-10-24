@@ -3,7 +3,6 @@ package com.duit.android.codelabs.di.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.duit.android.codelabs.di.model.Data
 import com.duit.android.codelabs.di.repository.DataRepository
 
@@ -23,11 +22,5 @@ class MainViewModel(private val repository: DataRepository) : ViewModel() {
                 loadDataList()
             }
         }
-    }
-}
-
-class MainViewModelFactory(private val repository: DataRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel(repository) as T
     }
 }
