@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bottom_navi_todo"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:title="@string/todo"
+        android:icon="@drawable/ic_todo"/>
+    <item
+        android:id="@+id/bottom_navi_in_progress"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:title="@string/in_progress"
+        android:icon="@drawable/ic_in_progress"/>
+    <item
+        android:id="@+id/bottom_navi_done"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:title="@string/done"
+        android:icon="@drawable/ic_done"/>
+</menu>

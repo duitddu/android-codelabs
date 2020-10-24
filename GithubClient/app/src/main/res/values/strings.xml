@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GithubClient</string>
+    <string name="github_api_key">asd</string>
+</resources>

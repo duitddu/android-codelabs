@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JetTodo</string>
+
+    <string name="todo">할일</string>
+    <string name="in_progress">진행중</string>
+    <string name="done">완료</string>
+</resources>
