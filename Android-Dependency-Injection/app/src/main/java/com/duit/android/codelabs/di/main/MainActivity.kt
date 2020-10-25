@@ -3,6 +3,7 @@ package com.duit.android.codelabs.di.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,13 +13,14 @@ import com.duit.android.codelabs.di.model.Data
 import com.duit.android.codelabs.di.repository.DataRepository
 import com.duit.android.codelabs.di.source.impl.LocalDataSourceImpl
 import com.duit.android.codelabs.di.source.impl.RemoteDataSourceImpl
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private var isRemote: Boolean = false
     private lateinit var dataListAdapter: DataListAdapter
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,18 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        val dataSource = if (isRemote) {
-            RemoteDataSourceImpl()
-        } else {
-            LocalDataSourceImpl()
-        }
-
-        val repository = DataRepository(dataSource)
-
-        viewModel = ViewModelProvider(this, MainViewModelFactory(repository)).get(MainViewModel::class.java)
-
         viewModel.dataList.observe(this) {
-            Log.e("Datalist", "$it")
             dataListAdapter.dataList = it
         }
 
