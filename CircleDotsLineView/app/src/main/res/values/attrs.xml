@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleDotsLineView">
+        <attr format="dimension" name="dotSize" />
+        <attr format="color" name="dotInnerColor" />
+        <attr format="color" name="dotBorderColor" />
+        <attr format="dimension" name="dotBorderSize" />
+        <attr format="dimension" name="dotSpacing" />
+        <attr format="boolean" name="vertical" />
+    </declare-styleable>
+</resources>
