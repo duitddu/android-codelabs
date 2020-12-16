@@ -17,25 +17,46 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.remoteconfig.ktx.get
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import java.lang.IllegalStateException
 
 class MainActivity : AppCompatActivity() {
     private var firebaseAuth: FirebaseAuth? = null
     private var googleSignInClient: GoogleSignInClient? = null
 
     private lateinit var remoteConfig: FirebaseRemoteConfig
+    private val crashlytics: FirebaseCrashlytics by lazy {
+        FirebaseCrashlytics.getInstance()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-        binding.btnGoogle.setOnClickListener { signInWithGoogle() }
+        crashlytics.run {
+            setUserId("SomeUserId")
+            setCustomKey("userKey", 123456789)
+            setCustomKey("customKey", "customValue")
+        }
+
+        crashlytics.log("Firebase Crashlytics Custom log!")
+
+        binding.btnGoogle.setOnClickListener {
+            try {
+                throw IllegalStateException("Firebase Crashlytics Custom logging Test")
+            } catch (e: IllegalStateException) {
+                e.printStackTrace()
+                crashlytics.recordException(e)
+            }
+            signInWithGoogle()
+        }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
