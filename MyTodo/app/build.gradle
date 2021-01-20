@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -24,8 +20,18 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -41,14 +47,12 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    implementation "androidx.room:room-runtime:2.2.4"
-    kapt "android.arch.persistence.room:compiler:2.2.4"
+    implementation "androidx.room:room-runtime:2.2.6"
+    kapt "androidx.room:room-compiler:2.2.6"
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
 
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
-    kapt 'com.android.databinding:compiler:3.5.3'
 }

@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="com.android.sample.mytodo.viewmodel.TodoViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
